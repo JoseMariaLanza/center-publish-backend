@@ -1,0 +1,12 @@
+// Imports
+
+export interface I{{ className }}
+{
+    public function get(par = null);
+
+    public function store(req);
+
+    public function update(req);
+
+    public function delete();
+}

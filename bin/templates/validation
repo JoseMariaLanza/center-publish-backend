@@ -1,0 +1,9 @@
+// Imports
+
+export class {{ className }}Validation
+{
+    public static function validateStore(req)
+    {
+        //return validation response
+    }
+}

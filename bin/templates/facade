@@ -1,0 +1,50 @@
+// Imports
+
+export class {{ className }} implements I{{ className }}
+{
+    constructor()
+    {
+        // Code here...
+    }
+
+
+    function get(par = null)
+    {
+        try {
+            // Code here...
+            // comunicates with app layer in his corresponding service
+        } catch (Exception ex) {
+            // ApiResponse server error
+        }
+    }
+
+    function store(req)
+    {
+        try {
+            // Code here...
+            // comunicates with app layer in his corresponding service
+        } catch (Exception ex) {
+            // ApiResponse server error
+        }
+    }
+
+    function update(req)
+    {
+        try {
+            // Code here...
+            // comunicates with app layer in his corresponding service
+        } catch (Exception ex) {
+            // ApiResponse server error
+        }
+    }
+
+    function delete()
+    {
+        try {
+            // Code here...
+            // comunicates with app layer in his corresponding service
+        } catch (Exception ex) {
+            // ApiResponse server error
+        }
+    }
+}

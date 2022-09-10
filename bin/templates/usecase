@@ -1,0 +1,17 @@
+// Imports
+
+export class {{ className }}StoreUseCase
+{
+    static function store(req)
+    {
+        try {
+            if (!{{ className }}Validation.validateStore(req)) {
+                // return ApiResponse.badRequest('HERE GOES YOUR CUSTOM ERROR!!.');
+            }
+
+            return {{ className }}Service.store(req);
+        } catch (Exception ex) {
+            return ApiResponse.serverError(ex.message);
+        }
+    }
+}

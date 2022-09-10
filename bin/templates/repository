@@ -1,0 +1,40 @@
+// Imports
+
+export class {{ className }}Repository
+{
+    public static function store($request)
+    {
+        // const modelName = new {{ className }}();
+
+        // Code here...
+
+        //return 0
+    }
+
+    public static function update()
+    {
+        // const modelName = new {{ className }}();
+
+        // Code here...
+
+        //return 0
+    }
+
+    public static function get($id)
+    {
+        // const modelName = new {{ className }}();
+
+        // Code here...
+
+        //return 0
+    }
+
+    public static function delete($id)
+    {
+        // const modelName = new {{ className }}();
+
+        // Code here...
+
+        //return 0
+    }
+}
