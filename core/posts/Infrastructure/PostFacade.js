@@ -1,6 +1,6 @@
 // Imports
 
-export class {{ className }}
+export class Post
 {
     constructor()
     {

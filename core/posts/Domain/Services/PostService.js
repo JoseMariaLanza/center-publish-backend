@@ -1,10 +1,10 @@
 // Imports
 
-export class {{ className }}Repository
+export class PostService
 {
     async get($id = null)
     {
-        // const modelName = new {{ className }}();
+        // const modelName = new Post();
 
         // Code here...
 
@@ -13,7 +13,7 @@ export class {{ className }}Repository
 
     async store($request)
     {
-        // const modelName = new {{ className }}();
+        // const modelName = new Post();
 
         // Code here...
 
@@ -22,7 +22,7 @@ export class {{ className }}Repository
 
     async update()
     {
-        // const modelName = new {{ className }}();
+        // const modelName = new Post();
 
         // Code here...
 
@@ -31,7 +31,7 @@ export class {{ className }}Repository
 
     async delete($id)
     {
-        // const modelName = new {{ className }}();
+        // const modelName = new Post();
 
         // Code here...
 

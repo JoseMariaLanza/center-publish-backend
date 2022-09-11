@@ -4,11 +4,16 @@
   "private": true,
   "scripts": {
     "create-app": "node ./bin/commands/CreateAppCommand.js --appname --modulename",
-    "start": "SET DEBUG=center-publish-backend:* & node ./bin/www"
+    "create-facade": "node ./bin/commands/CreateFacadeCommand.js --appname --modulename",
+    "create-service": "node ./bin/commands/CreateServiceCommand.js --appname --modulename",
+    "create-repository": "node ./bin/commands/CreateRepositoryCommand.js --appname --modulename",
+    "start": "node ./bin/www",
+    "dev": "SET DEBUG=center-publish-backend:* & nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.2",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",

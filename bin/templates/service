@@ -1,6 +1,6 @@
 // Imports
 
-export class {{ className }}Repository
+export class {{ className }}Service
 {
     async get($id = null)
     {

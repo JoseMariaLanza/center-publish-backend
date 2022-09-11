@@ -2,7 +2,7 @@
 
 export class {{ className }}Validation
 {
-    public static function validateStore(req)
+    async validateStore(req)
     {
         //return validation response
     }

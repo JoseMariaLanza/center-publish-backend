@@ -1,18 +1,28 @@
 const fs = require('fs');
 const path = require('path');
 const pluralize = require('pluralize');
-const exec = require('child_process').exec;
+
 
 class CreateAppCommand {
 
     constructor() {
+        // if (!this.flagValidation()) {
+        //     return 0;
+        // }
 
-        const appName = process.argv[4][0]/* .toUpperCase() */ + process.argv[4].substring(1);
-        const moduleName = process.argv[5][0] /* .toUpperCase() */ + process.argv[5].substring(1);
+        const filePath = this.getSourceFilePath();
 
-        exec(`npm run create-facade --appname ${appName} --modulename ${moduleName}`);
-        exec(`npm run create-service --appname ${appName} --modulename ${moduleName}`);
-        exec(`npm run create-repository --appname ${appName} --modulename ${moduleName}`);
+        this.makeDirectory(filePath);
+
+        const contents = this.getSourceFile();
+
+        if (!fs.existsSync(filePath)) {
+            fs.writeFileSync(filePath, contents);
+            console.log('Created!!')
+        } else {
+            console.log('Replaced!!')
+        }
+        return 0;
     }
 
     // TODO: args validation
@@ -38,8 +48,8 @@ class CreateAppCommand {
         const appName = process.argv[4][0]/* .toUpperCase() */ + process.argv[4].substring(1);
         const moduleName = process.argv[5][0] /* .toUpperCase() */ + process.argv[5].substring(1);
 
-        return (path.basename(appName) + '\\' + moduleName + '\\' + 'Infrastructure' + '\\' +
-            this.getSingularClassName(moduleName) + '.js');
+        return (path.basename(appName) + '\\' + moduleName + '\\' + 'Domain' + '\\' +
+            'Repositories' + '\\' + this.getSingularClassName(moduleName) + 'Repository.js');
     }
 
     makeDirectory(path) {
@@ -52,7 +62,7 @@ class CreateAppCommand {
     }
 
     getSourceFile() {
-        return this.getTemplateContent(this.getTemplatePath('facade'), this.getTemplateVariables());
+        return this.getTemplateContent(this.getTemplatePath('repository'), this.getTemplateVariables());
     }
 
     getSingularClassName(name) {

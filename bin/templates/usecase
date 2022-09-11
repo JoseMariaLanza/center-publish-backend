@@ -2,16 +2,16 @@
 
 export class {{ className }}StoreUseCase
 {
-    static function store(req)
+    async store(req)
     {
         try {
             if (!{{ className }}Validation.validateStore(req)) {
-                // return ApiResponse.badRequest('HERE GOES YOUR CUSTOM ERROR!!.');
+                // return await ApiResponse.badRequest('HERE GOES YOUR CUSTOM ERROR!!.');
             }
 
             return {{ className }}Service.store(req);
         } catch (Exception ex) {
-            return ApiResponse.serverError(ex.message);
+            return await ApiResponse.serverError(ex.message);
         }
     }
 }
