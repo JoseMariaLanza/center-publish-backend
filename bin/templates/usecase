@@ -6,12 +6,12 @@ export class {{ className }}StoreUseCase
     {
         try {
             if (!{{ className }}Validation.validateStore(req)) {
-                // return await ApiResponse.badRequest('HERE GOES YOUR CUSTOM ERROR!!.');
+                // return ApiResponse.badRequest('HERE GOES YOUR CUSTOM ERROR!!.');
             }
 
             return {{ className }}Service.store(req);
-        } catch (Exception ex) {
-            return await ApiResponse.serverError(ex.message);
+        } catch (error) {
+            return ApiResponse.serverError(ex.message);
         }
     }
 }
