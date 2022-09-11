@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 
+
 const login = async (req, res = express.response) => {
     try {
         const { data } = await axios.get('http://localhost:8000/api/1.1/user/profile/', {
@@ -9,16 +10,16 @@ const login = async (req, res = express.response) => {
             }
         });
 
-        return res.json({
+        return res.status(200).json({
             ok: true,
             message: 'User authenticated',
             data
         });
     } catch (error) {
-        return res.json({
+        return res.status(error.response.status).json({
             ok: false,
-            error: error.response.data.detail
-        }, error.response.status);
+            error: error.response.data
+        });
     }
 }
 
