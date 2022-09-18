@@ -1,0 +1,9 @@
+// Imports
+
+export class {{ className }}Validation
+{
+    async validateStore(req)
+    {
+        //return validation response
+    }
+}

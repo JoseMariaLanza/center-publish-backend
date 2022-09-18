@@ -1,0 +1,17 @@
+// Imports
+
+export class {{ className }}StoreUseCase
+{
+    async store(req)
+    {
+        try {
+            if (!{{ className }}Validation.validateStore(req)) {
+                // return ApiResponse.badRequest('HERE GOES YOUR CUSTOM ERROR!!.');
+            }
+
+            return {{ className }}Service.store(req);
+        } catch (error) {
+            return ApiResponse.serverError(ex.message);
+        }
+    }
+}
