@@ -12,6 +12,8 @@ const validateHeader = (req, res = response, next) => {
         });
     }
 
+    console.log(errors);
+
     next();
 }
 

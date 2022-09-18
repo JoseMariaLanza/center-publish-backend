@@ -4,7 +4,7 @@ const axios = require('axios');
 
 const login = async (req, res = express.response) => {
     try {
-        const { data } = await axios.get('http://localhost:8000/api/1.1/user/profile/', {
+        const { data } = await axios.get(`${process.env.CS_API}user/profile/`, {
             headers: {
                 'Authorization': req.headers.authorization
             }
@@ -16,6 +16,7 @@ const login = async (req, res = express.response) => {
             data
         });
     } catch (error) {
+        console.log(error);
         return res.status(error.response.status).json({
             ok: false,
             error: error.response.data
