@@ -7,13 +7,15 @@
     "create-facade": "node ./bin/commands/CreateFacadeCommand.js --appname --modulename",
     "create-service": "node ./bin/commands/CreateServiceCommand.js --appname --modulename",
     "create-repository": "node ./bin/commands/CreateRepositoryCommand.js --appname --modulename",
-    "start": "node ./bin/www",
-    "dev": "SET DEBUG=center-publisher-backend:* & nodemon ./bin/www"
+    "start": "NODE_ENV=production node ./bin/www",
+    "dev": "NODE_ENV=development SET DEBUG=center-publisher-backend:* & nodemon ./bin/www",
+    "test": "NODE_ENV=test jest --verbose"
   },
   "dependencies": {
     "axios": "^0.27.2",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "debug": "~2.6.9",
     "dotenv": "^16.0.2",
     "express": "~4.16.1",
