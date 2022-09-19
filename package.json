@@ -7,9 +7,9 @@
     "create-facade": "node ./bin/commands/CreateFacadeCommand.js --appname --modulename",
     "create-service": "node ./bin/commands/CreateServiceCommand.js --appname --modulename",
     "create-repository": "node ./bin/commands/CreateRepositoryCommand.js --appname --modulename",
-    "start": "NODE_ENV=production node ./bin/www",
-    "dev": "NODE_ENV=development SET DEBUG=center-publisher-backend:* & nodemon ./bin/www",
-    "test": "NODE_ENV=test jest --verbose"
+    "start": "cross-env NODE_ENV=production node ./bin/www",
+    "dev": "cross-env NODE_ENV=development SET DEBUG=center-publisher-backend:* & nodemon ./bin/www",
+    "test": "cross-env NODE_ENV=test jest --verbose"
   },
   "dependencies": {
     "axios": "^0.27.2",
