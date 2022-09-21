@@ -2,25 +2,21 @@ const mongoose = require('mongoose');
 const { connectDb, closeDbConnection } = require('../database/config')
 
 
-describe('Check DB connectionz', () => {
+describe('Check DB connection', () => {
     test('Connect DB', async () => {
         const connectionResult = await connectDb();
 
-        expect(connectionResult).toBe(true);
+        expect(await connectionResult).toBe('connected');
     });
 
     test('Close DB connection', async () => {
         await connectDb();
-        const dbDisconnected = closeDbConnection();
+        const dbDisconnected = await closeDbConnection();
         expect(dbDisconnected).toBe(true);
 
     })
 });
 
-
-afterAll(done => {
-    // Closing the DB connection allows Jest to exit successfully.
-    mongoose.connection.close()
-    done()
-})
-
+// afterAll(async () => {
+//     await mongoose.connection.close();
+// });

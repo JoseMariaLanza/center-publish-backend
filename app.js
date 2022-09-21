@@ -1,6 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
-const { dbConnection } = require('./database/config');
+const { connectDb } = require('./database/config');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -14,7 +14,7 @@ const post = require('./routes/post');
 
 const app = express();
 
-dbConnection();
+connectDb();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

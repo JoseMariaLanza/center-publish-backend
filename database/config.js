@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { connect, connection } = require('mongoose');
+const mongoose = require('mongoose');
 
 const { NODE_ENV, MONGO_DB_URI, MONGO_DB_URI_TEST } = process.env;
 
@@ -9,20 +9,21 @@ const connectionString = NODE_ENV === 'test'
 
 const connectDb = async () => {
     try {
-        await connect(connectionString);
+        await mongoose.connect(connectionString, { useNewUrlParser: true });
+        const connectionState = mongoose.connection.db.s.client.topology.s.state;
 
-        console.log('Connection successful!.');
-        return true;
+        console.log(`Connection state: ${connectionState}!.`);
+        return connectionState;
     } catch (error) {
-        console.log(error);
-        return false;
-        // throw new Error('Error: DB not initialized.');
+        mongoose.connection.close();
+        console.log('Error at connectDb: ', error);
+        throw error;
     }
 }
 
-const closeDbConnection = () => {
+const closeDbConnection = async () => {
     try {
-        connection.close()
+        await mongoose.connection.close();
 
         console.log('DB disconected!.');
         return true;
