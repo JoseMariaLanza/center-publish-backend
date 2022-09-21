@@ -16,11 +16,19 @@ beforeAll(async () => {
 const api = supertest(app);
 
 describe('Posts', () => {
-    test('Unauthenticated user can\'t get posts - Http Bad Request.', async () => {
+    test('Unauthenticated, user can\'t get posts - Http Bad Request.', async () => {
         await api
             .get('/api/posts')
             .expect('Content-Type', /application\/json/)
             .expect(400)
+    })
+
+    test('Unauthorized, user send worng token - Http Unauthorized.', async () => {
+        await api
+            .get('/api/posts')
+            .set('Authorization', 'Wrong token')
+            .expect('Content-Type', /application\/json/)
+            .expect(401)
     })
 
     // test('Posts ares returned as json.', async () => {
