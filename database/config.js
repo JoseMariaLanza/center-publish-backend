@@ -15,7 +15,7 @@ const connectDb = async () => {
         console.log(`Connection state: ${connectionState}!.`);
         return connectionState;
     } catch (error) {
-        mongoose.connection.close();
+        (mongoose.connection) && mongoose.connection.close();
         console.log('Error at connectDb: ', error);
         throw error;
     }

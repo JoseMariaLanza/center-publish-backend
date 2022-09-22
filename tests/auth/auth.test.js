@@ -62,7 +62,7 @@ describe('Auth', () => {
             .expect('Content-Type', /application\/json/)
     })
 
-    test('User can\'t get his profile data if not logged in - Http Unauthenticated.', async () => {
+    test('User can\'t get his profile data if not logged in - Http Unauthorized.', async () => {
 
         await api
             .get('/api/auth/profile')

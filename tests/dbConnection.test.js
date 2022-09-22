@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const { connectDb, closeDbConnection } = require('../database/config')
 
 
@@ -16,7 +15,3 @@ describe('Check DB connection', () => {
 
     })
 });
-
-// afterAll(async () => {
-//     await mongoose.connection.close();
-// });

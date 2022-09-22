@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 const supertest = require('supertest');
+const { set } = require('../../app');
 const app = require('../../app');
 require('dotenv').config();
 
 const { NODE_ENV, MONGO_DB_URI, MONGO_DB_URI_TEST } = process.env;
 
 const connectionString = NODE_ENV === 'test'
-? MONGO_DB_URI_TEST
-: MONGO_DB_URI;
+    ? MONGO_DB_URI_TEST
+    : MONGO_DB_URI;
 
 beforeAll(async () => {
     await mongoose.connect(connectionString);
@@ -31,28 +32,22 @@ describe('Posts', () => {
             .expect(401)
     })
 
-    // test('Posts ares returned as json.', async () => {
-    //     const userData = {
-    //         email: 'lanza.josemaria@gmail.com',
-    //         password: '123456'
-    //     };
+    test('All posts are retrived as json - Http OK', async () => {
+        const userData = {
+            email: 'lanza.josemaria@gmail.com',
+            password: '123456'
+        };
 
-    //     const res = await api
-    //         .post('/api/auth')
-    //         .send(userData)
-    //         .set('Accept', 'application/json')
-    //         .expect(404)
-    //         .then(res => {
-    //             assert(res.body.token, true)
-    //         })
+        const { _body } = await api
+            .post('/api/auth').send(userData);
+        const token = _body.data.token;
 
-    //     console.log('RESPONSE TEST: ', res);
-
-    //     // await api
-    //     //     .get('/api/posts')
-    //     //     .expect(200)
-    //     //     .expect('Content-Type', /application\/json/)
-    // })
+        await api
+            .get('/api/posts')
+            .set('Authorization', `Token ${token}`)
+            .expect('Content-Type', /application\/json/)
+            .expect(200)
+    })
 });
 
 
