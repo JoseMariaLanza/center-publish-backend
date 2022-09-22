@@ -4,6 +4,24 @@ const axios = require('axios');
 
 const login = async (req, res = express.response) => {
     try {
+        const { data } = await axios.post(`${process.env.CS_API}user/token/`, req.body);
+
+        return res.status(200).json({
+            ok: true,
+            message: 'User authenticated',
+            data
+        });
+    } catch (error) {
+        console.log('ERROR: ', error);
+        return res.status(error.response.status).json({
+            ok: false,
+            error: error.response.data
+        });
+    }
+}
+
+const profile = async (req, res = express.response) => {
+    try {
         const { data } = await axios.get(`${process.env.CS_API}user/profile/`, {
             headers: {
                 'Authorization': req.headers.authorization
@@ -12,7 +30,7 @@ const login = async (req, res = express.response) => {
 
         return res.status(200).json({
             ok: true,
-            message: 'User authenticated',
+            message: 'User profile retrieved successfuly.',
             data
         });
     } catch (error) {
@@ -24,4 +42,4 @@ const login = async (req, res = express.response) => {
     }
 }
 
-module.exports = { login }
+module.exports = { login, profile }

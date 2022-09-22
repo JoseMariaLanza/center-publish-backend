@@ -23,7 +23,7 @@ const CenterSchoolsApiAuth = async (req, res = response, next) => {
 
         next();
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(error.response.status).json({
             ok: false,
             error: error.response.data
