@@ -33,8 +33,8 @@ const getUserPosts = async (req, res = express.response) => {
         const user_id = req.params.user_id;
 
         if (Object.entries(req.query).length > 0) {
-            const postTile = req.query.title;
-            posts = await Post.find({ $and: [{ user_id: user_id, title: { $regex: postTile, $options: "i" } }] });
+            const postTitle = req.query.title;
+            posts = await Post.find({ $and: [{ user_id: user_id, title: { $regex: postTitle, $options: "i" } }] });
         } else {
             posts = await Post.find({ user_id });
         }
