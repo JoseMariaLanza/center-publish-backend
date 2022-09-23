@@ -31,7 +31,6 @@ const getUserPosts = async (req, res = express.response) => {
     try {
         let posts = null;
         const user_id = req.params.user_id;
-        console.log('REQUEST QUERY: ', req.query);
 
         if (Object.entries(req.query).length > 0) {
             const postTile = req.query.title;
@@ -48,7 +47,7 @@ const getUserPosts = async (req, res = express.response) => {
             });
         }
 
-        return res.status(400).json({
+        return res.status(404).json({
             ok: false,
             message: 'You haven\'t posts.'
         });
