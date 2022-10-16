@@ -14,7 +14,7 @@ const get = async (req, res = express.response) => {
             });
         }
 
-        return res.status(400).json({
+        return res.status(404).json({
             ok: false,
             message: 'Inexistent posts.'
         });
@@ -28,14 +28,18 @@ const get = async (req, res = express.response) => {
 }
 
 const getUserPosts = async (req, res = express.response) => {
+    let posts = null;
+    let message = 'You haven\'t posts yet.';
+
     try {
-        let posts = null;
         const user_id = req.params.user_id;
-        console.log('REQUEST QUERY: ', req.query);
 
         if (Object.entries(req.query).length > 0) {
-            const postTile = req.query.title;
-            posts = await Post.find({ $and: [{ user_id: user_id, title: { $regex: postTile, $options: "i" } }] });
+            const postTitle = req.query.title;
+            posts = await Post.find({ $and: [{ user_id: user_id, title: { $regex: postTitle, $options: "i" } }] });
+            if (posts.length === 0) {
+                message = 'There are no records matching your search.';
+            }
         } else {
             posts = await Post.find({ user_id });
         }
@@ -48,9 +52,9 @@ const getUserPosts = async (req, res = express.response) => {
             });
         }
 
-        return res.status(400).json({
+        return res.status(404).json({
             ok: false,
-            message: 'You haven\'t posts.'
+            message: message
         });
     } catch (error) {
         console.log(error)

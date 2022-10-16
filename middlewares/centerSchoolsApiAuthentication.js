@@ -1,9 +1,8 @@
-const { response } = require('express');
 const axios = require('axios');
 const { validationResult } = require('express-validator');
 
 
-const CenterSchoolsApiAuth = async (req, res = response, next) => {
+const CenterSchoolsApiAuthentication = async (req, res, next) => {
 
     try {
         const errors = validationResult(req);
@@ -23,7 +22,7 @@ const CenterSchoolsApiAuth = async (req, res = response, next) => {
 
         next();
     } catch (error) {
-        // console.log(error);
+        console.log('Error at API Authentication Middleware: ', error);
         return res.status(error.response.status).json({
             ok: false,
             error: error.response.data
@@ -32,4 +31,6 @@ const CenterSchoolsApiAuth = async (req, res = response, next) => {
 }
 
 
-module.exports = { CenterSchoolsApiAuth }
+module.exports = {
+    CenterSchoolsApiAuthentication
+}

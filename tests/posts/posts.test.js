@@ -48,6 +48,68 @@ describe('Posts', () => {
             .expect('Content-Type', /application\/json/)
             .expect(200)
     })
+
+    test('User forbidden to see all posts - Http Forbidden', async () => {
+        const userData = {
+            email: "rodrigoroldan@gmail.com",
+            password: "j6CfFhsB"
+        }
+
+        const { _body } = await api
+            .post('/api/auth').send(userData)
+            .expect(200)
+
+        const token = _body.data.token;
+
+        await api
+            .get('/api/posts')
+            .set('Authorization', `Token ${token}`)
+            .expect('Content-Type', /application\/json/)
+            .expect(403)
+    })
+
+    test('User can\'t see other users posts - Http Forbidden', async () => {
+        const userData = {
+            email: "rodrigoroldan@gmail.com",
+            password: "j6CfFhsB"
+        }
+
+        const { _body } = await api
+            .post('/api/auth').send(userData)
+            .expect(200)
+
+        const token = _body.data.token;
+
+        await api
+            .get(`/api/posts/1`)
+            .set('Authorization', `Token ${token}`)
+            .expect('Content-Type', /application\/json/)
+            .expect(403)
+    })
+
+    test('User can see his own posts - Http OK', async () => {
+        const userData = {
+            email: "rodrigoroldan@gmail.com",
+            password: "j6CfFhsB"
+        }
+
+        const { _body } = await api
+            .post('/api/auth').send(userData)
+            .expect(200)
+
+        const token = _body.data.token;
+
+        const { _body: { data: { user: userId } } } = await api
+            .get('/api/auth/profile')
+            .set('Authorization', `Token ${token}`)
+            .expect(200)
+
+        await api
+            .get(`/api/posts/${userId}`)
+            .set('Authorization', `Token ${token}`)
+            .expect('Content-Type', /application\/json/)
+            .expect(200)
+    })
 });
 
 

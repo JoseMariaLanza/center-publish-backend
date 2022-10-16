@@ -3,7 +3,7 @@ const router = Router();
 
 const { login, profile } = require('../controllers/auth');
 const { header } = require('express-validator');
-const { validateHeader } = require('../middlewares/headerVlidator');
+const { validateHeader } = require('../middlewares/headerValidator');
 
 router.post('/',
     login

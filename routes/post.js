@@ -3,12 +3,14 @@ const router = Router();
 
 const { store, get, getUserPosts } = require('../core/posts/Infrastructure/controllers/post');
 const { header } = require('express-validator');
-const { CenterSchoolsApiAuth } = require('../middlewares/centerSchoolsApiAuth');
+const { CenterSchoolsApiAuthentication } = require('../middlewares/centerSchoolsApiAuthentication');
+const { CenterSchoolsApiSuperUserAuthorization, CenterSchoolsApiAuthorization } = require('../middlewares/centerSchoolsApiAuthorization');
 
 router.get('/',
     [
         header('Authorization', 'You have not sent user token.').not().isEmpty(),
-        CenterSchoolsApiAuth
+        CenterSchoolsApiAuthentication,
+        CenterSchoolsApiSuperUserAuthorization
     ],
     get
 );
@@ -16,7 +18,8 @@ router.get('/',
 router.get('/:user_id?',
     [
         header('Authorization', 'You have not sent user token.').not().isEmpty(),
-        CenterSchoolsApiAuth
+        CenterSchoolsApiAuthentication,
+        CenterSchoolsApiAuthorization
     ],
     getUserPosts
 );
@@ -24,7 +27,7 @@ router.get('/:user_id?',
 router.post('/new',
     [
         header('Authorization', 'You have not sent user token.').not().isEmpty(),
-        CenterSchoolsApiAuth
+        CenterSchoolsApiAuthentication
     ],
     store
 );
