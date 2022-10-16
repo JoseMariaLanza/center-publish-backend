@@ -14,7 +14,7 @@ const get = async (req, res = express.response) => {
             });
         }
 
-        return res.status(400).json({
+        return res.status(404).json({
             ok: false,
             message: 'Inexistent posts.'
         });
