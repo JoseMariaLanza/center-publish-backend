@@ -27,11 +27,11 @@ class AuthRepository {
     }
   }
 
-  async getUserProfile(req, res) {
+  async getUserAccountData(token, res) {
     try {
       const { data } = await axios.get(`${process.env.CS_API}user/profile/`, {
         headers: {
-          'Authorization': req.headers.authorization
+          'Authorization': token
         }
       });
 

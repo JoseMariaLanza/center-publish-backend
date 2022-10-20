@@ -16,6 +16,16 @@ class AuthFacade {
     }
   }
 
+  async profile(req, res) {
+    try {
+      const result = new AuthService();
+      return await result.profile(req.headers.authorization, res);
+    } catch (error) {
+      console.log('ERROR IN FACADE!');
+      return error;
+    }
+  }
+
   async store(req) {
     try {
       // Code here...

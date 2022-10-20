@@ -1,33 +1,39 @@
-const { body, validationResult } = require('express-validator');
+// const { body, validationResult } = require('express-validator');
 const AuthFacade = require('../../Infrastructure/AuthFacade');
 
 class SignIn {
-    async getUserToken(req, res) {
-        try {
-            body('email').isEmail();
-            body('password').isLength({ min: 8 });
+  async getUserToken(req, res) {
+    try {
+      // body('email').isEmail();
+      // body('password').isLength({ min: 8 });
 
-            // const errors = validationResult(req);
-            validationResult(req).throw();
+      // // const errors = validationResult(req);
+      // validationResult(req).throw();
 
-            // if (!errors.isEmpty()) {
-            //   return res.status(400).json({
-            //     ok: false,
-            //     errors: errors.array()
-            //   });
-            // }
+      // if (!errors.isEmpty()) {
+      //   return res.status(400).json({
+      //     ok: false,
+      //     errors: errors.array()
+      //   });
+      // }
 
-            const loginResult = new AuthFacade();
-            return await loginResult.login(req, res);
+      const authResult = new AuthFacade();
+      return await authResult.login(req, res);
 
-        } catch (error) {
-
-        }
+    } catch (error) {
+      console.log('ERROR IN USE CASE (SignIn): ', error);
     }
+  }
 
-    async getUserProfile(req, res) {
+  async getUserProfile(req, res) {
+    try {
+      const authResult = new AuthFacade();
+      return await authResult.profile(req, res);
 
+    } catch (error) {
+      console.log('ERROR IN USE CASE (getUserProfile): ', error);
     }
+  }
 }
 
 module.exports = SignIn;

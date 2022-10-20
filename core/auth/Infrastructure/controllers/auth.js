@@ -1,39 +1,24 @@
 const express = require('express');
-// const AuthFacade = require('../AuthFacade');
 const SignIn = require('../../Application/AuthenticationUseCases/SignIn')
 
 const login = async (req, res = express.response) => {
   try {
-    // const loginResult = new AuthFacade();
-    // return await loginResult.login(req, res);
     const signIn = new SignIn();
     return await signIn.getUserToken(req, res);
   } catch (error) {
-    console.log('ERROR IN CONTROLLER!', error);
+    console.log('ERROR IN CONTROLLER! (login): ', error);
     return error
   }
 }
 
-const profile = async (req) => {
+const getProfile = async (req, res = express.response) => {
   try {
-    const { data } = await axios.get(`${process.env.CS_API}user/profile/`, {
-      headers: {
-        'Authorization': req.headers.authorization
-      }
-    });
-
-    return res.status(200).json({
-      ok: true,
-      message: 'User profile retrieved successfuly.',
-      data
-    });
+    const signIn = new SignIn();
+    return await signIn.getUserProfile(req, res);
   } catch (error) {
-    console.log(error);
-    return res.status(error.response.status).json({
-      ok: false,
-      error: error.response.data
-    });
+    console.log('ERROR IN CONTROLLER! (getProfile): ', error);
+    return error
   }
 }
 
-module.exports = { login, profile }
+module.exports = { login, getProfile }
